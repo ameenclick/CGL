@@ -34,19 +34,21 @@ public class ConveyGameOfLife{
      */
     public static void main(String[] args){
         Scanner scan=new Scanner(System.in);
-
         //Reading size of the board here
         int size=scan.nextInt();
         int m = scan.nextInt();
         int[][] l = new int[m][2];
         int i = 0;
-        System.out.println(size);
         //Reading no.of intital live cells
         while (scan.hasNextInt()) {
             l[i][0] = scan.nextInt();
             l[i++][1] = scan.nextInt();
+            if(m==l.length) {
+            	break;
+            }
         }
         //Create object of the Board Class
-        Board board=new Board(size,l);
+        Board board = new Board(size,l);
+        scan.close();
     }
 }

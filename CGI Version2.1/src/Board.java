@@ -1,21 +1,21 @@
 
 public class Board {
 	private int n;
-	private boolean[][] liveCells;
+	private int[][] liveCells;
 	private boolean[][] board;
-	private boolean[][] new;
 	/** 
 	 * Board class contian all board functions and paramerters
 	 * @ n
 	 * @ new[][]
 	 * @ board
 	 * */
-	public void Board(n,l) {
-		this.n=n;
+
+	public Board(int size, int[][] l) {
+		this.n=size;
         this.liveCells=l;
         board = new boolean[n][n];
-       
 	}
+	private boolean[][] newb;
 	/**
      * Creates initial genration [board]
      * @param n  size of the board n X n
