@@ -38,6 +38,7 @@ public class ConveyGameOfLife{
         //Reading size of the board here
         int size=scan.nextInt();
         //Create object of the Board Class
+        Board
         //Reading no.of intital live cells
 
         //Reading Live Cells
