@@ -43,12 +43,17 @@ public class ConveyGameOfLife{
         while (scan.hasNextInt()) {
             l[i][0] = scan.nextInt();
             l[i++][1] = scan.nextInt();
-            if(m==l.length) {
+            if(m==i) {
             	break;
             }
         }
         //Create object of the Board Class
         Board board = new Board(size,l);
+        board.createBoard(size,l);
+        board.printBoards();
+        //Board newb = new Board(size,l);
+        board.nextState();
+        board.printBoards();
         scan.close();
     }
 }

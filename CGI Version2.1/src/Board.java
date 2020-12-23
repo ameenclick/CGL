@@ -3,6 +3,7 @@ public class Board {
 	private int n;
 	private int[][] liveCells;
 	private boolean[][] board;
+	private boolean[][] boardnew;
 	/** 
 	 * Board class contian all board functions and paramerters
 	 * @ n
@@ -15,30 +16,28 @@ public class Board {
         this.liveCells=l;
         board = new boolean[n][n];
 	}
-	private boolean[][] newb;
+	
 	/**
      * Creates initial genration [board]
      * @param n  size of the board n X n
-     * @param lliveCells[][]  array of live cells
+     * @param liveCells[][]  array of live cells
      */
-	public boolean[][] creatBoard(n,board){
+	public void createBoard(int n,int liveCells[][]){
 		 for(int row=0;row<liveCells.length;row++)
 	       {
 	            board[liveCells[row][0]][liveCells[row][1]]=true;
 	       }
 	       System.out.println("CurrentGenration");
-	       printBoard(board);
-	       return board;
 	}
-	
-	
-	 /**
+	private boolean[][] newb;
+	/**
      * Printing Board
      * @param board[][]
      * @param n
      * @return
      */
-	public void printBoard(boolean board[][]) {
+	
+	public void printBoards() {
 		for(int i=0;i<board.length;i++)
         {
             for(int j=0;j<board[0].length-1;j++)
@@ -62,7 +61,6 @@ public class Board {
         }
 	}
 	
-	
 	/**
      * Method to gerate a next generation. Call the printBoard
      * to print the next generation.
@@ -70,9 +68,9 @@ public class Board {
      * @param board[][] board
      * 
      */
-	public nextState(boolean board[][]) {
+	public void nextState() {
 		System.out.println("NextGenration");
-        boolean[][] boardnew=new boolean[board.length][board[0].length];
+        boardnew=new boolean[board.length][board[0].length];
         int x=board.length,y=board[0].length;
         for(int i=0;i<x;i++)
         {
@@ -117,6 +115,19 @@ public class Board {
 
             }
         }
-        printBoard(boardnew);
+        setBoard(boardnew);
+        //printBoard();
 	}
+
+	public void setBoard(boolean boardnew[][])
+	{
+		for(int i=0;i<board.length;i++)
+        {
+            for(int j=0;j<board[0].length-1;j++)
+            { 
+            	this.board[i][j]=boardnew[i][j];
+            }
+        }
+	}
+
 }
