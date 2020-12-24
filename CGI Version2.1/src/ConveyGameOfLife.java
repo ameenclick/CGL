@@ -47,13 +47,14 @@ public class ConveyGameOfLife{
             	break;
             }
         }
-        //Create object of the Board Class
-        Board board = new Board(size,l);
+        //Create object of the LiveCells Class
+        LiveCells board = new LiveCells(size,l);
+        //First Generation based on the input
         System.out.println("Generation 0");
         board.createBoard(size,l);
         board.printBoards();
         int gen=1;
-        while(!board.getisNull())
+        while(!board.getisNull() && gen<40)
         {
 	        System.out.println("Generation "+(gen++));
 	        board.nextState();

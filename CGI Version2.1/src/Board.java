@@ -28,11 +28,10 @@ public class Board {
 	       {
 	            board[liveCells[row][0]][liveCells[row][1]]=true;
 	       }
-	       return ("CurrentGenration");
+	       return ("CurrentGeneration");
 	}
-	private boolean[][] newb;
 	/**
-     * Printing Board
+     * Printing Board in console
      * @param board[][]
      * @param n
      * @return
@@ -62,31 +61,6 @@ public class Board {
         }
 	}
 	
-	public String returnBoard() {
-		String game="";
-		for(int i=0;i<board.length;i++)
-        {
-            for(int j=0;j<board[0].length-1;j++)
-            {
-               if(board[i][j])
-                {
-                    game+="*";
-                }
-                else{
-                    game+=".";
-                }
-            }
-            if(board[i][board[0].length-1])
-            {
-                  game+="*";
-            }
-            else{
-                game+=".";
-            }
-            game+="\n";
-        }
-		return game;
-	}
 	/**
      * Method to gerate a next generation. Call the printBoard
      * to print the next generation.
@@ -143,8 +117,7 @@ public class Board {
         }
         if(this.checkBoardEquality(boardnew))
         {
-        	this.isNull=true;
-        	System.out.println(isNull);
+        	this.setisNull(true);
         }
         else
         {
@@ -164,6 +137,11 @@ public class Board {
 		return true;
 	}
 
+	
+	public boolean[][] getBoard(){
+		return this.board;
+	}
+	
 	public void setBoard(boolean boardnew[][])
 	{
 		for(int i=0;i<boardnew.length;i++)
@@ -173,6 +151,10 @@ public class Board {
             	this.board[i][j]=boardnew[i][j];
             }
         }
+	}
+	
+	public void setisNull(boolean isNull) {
+		this.isNull=isNull;
 	}
 	
 	public boolean getisNull() {
