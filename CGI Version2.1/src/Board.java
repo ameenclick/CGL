@@ -22,12 +22,12 @@ public class Board {
      * @param n  size of the board n X n
      * @param liveCells[][]  array of live cells
      */
-	public void createBoard(int n,int liveCells[][]){
+	public String createBoard(int n,int liveCells[][]){
 		 for(int row=0;row<liveCells.length;row++)
 	       {
 	            board[liveCells[row][0]][liveCells[row][1]]=true;
 	       }
-	       System.out.println("CurrentGenration");
+	       return ("CurrentGenration");
 	}
 	private boolean[][] newb;
 	/**
@@ -38,6 +38,7 @@ public class Board {
      */
 	
 	public void printBoards() {
+		//String game="";
 		for(int i=0;i<board.length;i++)
         {
             for(int j=0;j<board[0].length-1;j++)
@@ -45,22 +46,53 @@ public class Board {
                if(board[i][j])
                 {
                     System.out.print("*");
+                    //game+="*";
                 }
                 else{
                     System.out.print(".");
+                    //game+="*";
                 }
             }
             if(board[i][board[0].length-1])
             {
                   System.out.print("*");
+                  //game+="*";
             }
             else{
                 System.out.print(".");
+                //game+=".";
             }
             System.out.println();
+            //game+="\n";
         }
+		//return game;
 	}
 	
+	public String returnBoard() {
+		String game="";
+		for(int i=0;i<board.length;i++)
+        {
+            for(int j=0;j<board[0].length-1;j++)
+            {
+               if(board[i][j])
+                {
+                    game+="*";
+                }
+                else{
+                    game+=".";
+                }
+            }
+            if(board[i][board[0].length-1])
+            {
+                  game+="*";
+            }
+            else{
+                game+=".";
+            }
+            game+="\n";
+        }
+		return game;
+	}
 	/**
      * Method to gerate a next generation. Call the printBoard
      * to print the next generation.
@@ -69,7 +101,7 @@ public class Board {
      * 
      */
 	public void nextState() {
-		System.out.println("NextGenration");
+		//System.out.println("NextGenration");
         boardnew=new boolean[board.length][board[0].length];
         int x=board.length,y=board[0].length;
         for(int i=0;i<x;i++)
@@ -116,14 +148,13 @@ public class Board {
             }
         }
         setBoard(boardnew);
-        //printBoard();
 	}
 
 	public void setBoard(boolean boardnew[][])
 	{
-		for(int i=0;i<board.length;i++)
+		for(int i=0;i<boardnew.length;i++)
         {
-            for(int j=0;j<board[0].length-1;j++)
+            for(int j=0;j<boardnew[0].length-1;j++)
             { 
             	this.board[i][j]=boardnew[i][j];
             }
