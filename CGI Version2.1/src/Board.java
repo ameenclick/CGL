@@ -4,6 +4,7 @@ public class Board {
 	private int[][] liveCells;
 	private boolean[][] board;
 	private boolean[][] boardnew;
+	private boolean isNull=false;
 	/** 
 	 * Board class contian all board functions and paramerters
 	 * @ n
@@ -38,7 +39,6 @@ public class Board {
      */
 	
 	public void printBoards() {
-		//String game="";
 		for(int i=0;i<board.length;i++)
         {
             for(int j=0;j<board[0].length-1;j++)
@@ -46,26 +46,20 @@ public class Board {
                if(board[i][j])
                 {
                     System.out.print("*");
-                    //game+="*";
                 }
                 else{
                     System.out.print(".");
-                    //game+="*";
                 }
             }
             if(board[i][board[0].length-1])
             {
                   System.out.print("*");
-                  //game+="*";
             }
             else{
                 System.out.print(".");
-                //game+=".";
             }
             System.out.println();
-            //game+="\n";
         }
-		//return game;
 	}
 	
 	public String returnBoard() {
@@ -147,7 +141,27 @@ public class Board {
 
             }
         }
-        setBoard(boardnew);
+        if(this.checkBoardEquality(boardnew))
+        {
+        	this.isNull=true;
+        	System.out.println(isNull);
+        }
+        else
+        {
+        	setBoard(boardnew);
+        }
+	}
+	
+	public boolean checkBoardEquality(boolean boardnew[][]) {
+		for(int i=0;i<board.length;i++) {
+			for(int j=0;j<board[0].length;j++) {
+				if(boardnew[i][j] != board[i][j])
+				{
+					return false;
+				}
+			}
+		}
+		return true;
 	}
 
 	public void setBoard(boolean boardnew[][])
@@ -159,6 +173,10 @@ public class Board {
             	this.board[i][j]=boardnew[i][j];
             }
         }
+	}
+	
+	public boolean getisNull() {
+		return this.isNull;
 	}
 
 }

@@ -49,11 +49,16 @@ public class ConveyGameOfLife{
         }
         //Create object of the Board Class
         Board board = new Board(size,l);
+        System.out.println("Generation 0");
         board.createBoard(size,l);
         board.printBoards();
-        //Board newb = new Board(size,l);
-        board.nextState();
-        board.printBoards();
+        int gen=1;
+        while(!board.getisNull())
+        {
+	        System.out.println("Generation "+(gen++));
+	        board.nextState();
+	        board.printBoards();
+        }
         scan.close();
     }
 }
