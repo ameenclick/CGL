@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class LiveCells extends Cells {
 	private int[][] liveCells;
 	/**
@@ -5,7 +7,7 @@ public class LiveCells extends Cells {
 	 * @param size
 	 * @param liveCells
 	 */
-    public LiveCells(int size,int liveCells[][]) {
+    public LiveCells(int size,ArrayList<ArrayList<Integer>> liveCells) {
     	
     	super(size,liveCells);
     }

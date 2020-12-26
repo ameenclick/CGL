@@ -1,7 +1,8 @@
+import java.util.ArrayList;
 
 public class Board {
 	private int n;
-	private int[][] liveCells;
+	ArrayList<ArrayList<Integer> >  liveCells = new ArrayList<ArrayList<Integer> >();
 	private boolean[][] board;
 	private boolean[][] boardnew;
 	private boolean isNull=false;
@@ -12,7 +13,7 @@ public class Board {
 	 * @ board
 	 * */
 
-	public Board(int size, int[][] l) {
+	public Board(int size,ArrayList<ArrayList<Integer> >  l) {
 		this.n=size;
         this.liveCells=l;
         board = new boolean[n][n];
@@ -23,10 +24,10 @@ public class Board {
      * @param n  size of the board n X n
      * @param liveCells[][]  array of live cells
      */
-	public String createBoard(int n,int liveCells[][]){
-		 for(int row=0;row<liveCells.length;row++)
+	public String createBoard(int n,ArrayList<ArrayList<Integer> > liveCells){
+		 for(int row=0;row<liveCells.size();row++)
 	       {
-	            board[liveCells[row][0]][liveCells[row][1]]=true;
+	            board[liveCells.get(row).get(0)][liveCells.get(row).get(1)]=true;
 	       }
 	       return ("CurrentGeneration");
 	}

@@ -1,5 +1,4 @@
-import java.util.Scanner;
-import java.util.ArrayList;
+import java.util.*;
 
 /**
  * ****************Conways Game Of Life***********************************
@@ -38,18 +37,15 @@ public class ConveyGameOfLife{
         //Reading size of the board here
         int size=scan.nextInt();
         int m = scan.nextInt();
-        ArrayList<ArrayList<Integer> > live= new ArrayList<ArrayList<Integer> >();
-        int[][] l = new int[m][2];
+        ArrayList<ArrayList<Integer> > l= new ArrayList<ArrayList<Integer> >();
         int i = 0;
         //Reading no.of intital live cells
         while (scan.hasNextInt()) {
-            l[i][0] = scan.nextInt();
-            l[i++][1] = scan.nextInt();
+        	l.add(i++, new ArrayList<>(Arrays.asList(scan.nextInt(), scan.nextInt())));
             if(m==i) {
             	break;
             }
-        }
-        
+        } 
         //Create object of the LiveCells Class
         Cells board = new Cells(size,l);
         //First Generation based on the input

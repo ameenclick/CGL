@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Cells extends Board{
 	private boolean board[][];
 	/**
@@ -5,13 +7,15 @@ public class Cells extends Board{
 	 * @param size
 	 * @param liveCells
 	 */
-    public Cells(int size,int liveCells[][]){
-    	//Code
-    	super(size,liveCells);
-    	this.board=super.getBoard();
-    }
+   
     
-    /**
+    public Cells(int size, ArrayList<ArrayList<Integer>> l) {
+    	//Code
+    	super(size,l);
+    	this.board=super.getBoard();
+	}
+
+	/**
 	 * Return the board string for check in test case
 	 * @param game*/
 	public String returnBoard() {
