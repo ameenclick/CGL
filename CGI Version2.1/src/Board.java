@@ -71,64 +71,84 @@ public class Board {
 	public void nextState() {
 		//System.out.println("NextGenration");
         boardnew=new boolean[board.length][board[0].length];
+        boolean isTrue=false;
         int x=board.length,y=board[0].length;
         for(int i=0;i<x;i++)
         {
             for(int j=0;j<y;j++)
             {
+            	
                 boardnew[i][j]=false;
             }
         }
         for(int i=0;i<x;i++)
-        {
-            for(int j=0;j<y;j++)
-            {
-                int count=0;
-                for(int i1=i-1;i1<=i+1;i1++)
-                {
-                    for(int j1=j-1 ; j1<=j+1; j1++)
-                    {
-                        if(board[(i1 + x) % x][(j1 + y) % y])
-                        {
-                            count +=1;
-                        }
-                    }
-                }
-                if(board[i][j])
-                    count--;
-                if(count<2 && board[i][j])
-                {
-                    boardnew[i][j]=false;
-                }
-                else if((count == 2 || count ==3) && board[i][j])
-                {
-                    boardnew[i][j]=true;
-                }
-                else if(count>3 && board[i][j])
-                {
-                    boardnew[i][j]=false;
-                }
-                else if(count == 3 && !board[i][j])
-                {
-                    boardnew[i][j]=true;
-                }
-
-            }
-        }
-        if(this.checkBoardEquality(boardnew))
+	     {
+	            for(int j=0;j<y;j++)
+	            {
+	                int count=0;
+	                for(int i1=i-1;i1<=i+1;i1++)
+	                {
+	                    for(int j1=j-1 ; j1<=j+1; j1++)
+	                    {
+	                        if(board[(i1 + x) % x][(j1 + y) % y])
+	                        {
+	                            count +=1;
+	                        }
+	                    }
+	                }
+	                if(board[i][j])
+	                    count--;
+	                if(count<2 && board[i][j])
+	                {
+	                    boardnew[i][j]=false;
+	                }
+	                else if((count == 2 || count ==3) && board[i][j])
+	                {
+	                    boardnew[i][j]=true;
+	                }
+	                else if(count>3 && board[i][j])
+	                {
+	                    boardnew[i][j]=false;
+	                }
+	                else if(count == 3 && !board[i][j])
+	                {
+	                    boardnew[i][j]=true;
+	                }
+	
+	            }
+	    }
+        if( this.isEmptyBoard(boardnew))
         {
         	this.setisNull(true);
-        }
-        else
-        {
         	setBoard(boardnew);
         }
+        else if(this.checkBoardEquality(boardnew))
+	    {
+	        	this.setisNull(true);
+	    }
+	    else
+	    {
+	        	setBoard(boardnew);
+	    }
+        
 	}
 	
 	public boolean checkBoardEquality(boolean boardnew[][]) {
 		for(int i=0;i<board.length;i++) {
 			for(int j=0;j<board[0].length;j++) {
 				if(boardnew[i][j] != board[i][j])
+				{
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+	
+	public boolean isEmptyBoard(boolean board[][]) {
+		for(int i=0;i<board.length;i++) {
+			for(int j=0;j<board[0].length;j++) {
+				if(board[i][j])
 				{
 					return false;
 				}

@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 /**
  * ****************Conways Game Of Life***********************************
@@ -37,6 +38,7 @@ public class ConveyGameOfLife{
         //Reading size of the board here
         int size=scan.nextInt();
         int m = scan.nextInt();
+        ArrayList<ArrayList<Integer> > live= new ArrayList<ArrayList<Integer> >();
         int[][] l = new int[m][2];
         int i = 0;
         //Reading no.of intital live cells
@@ -47,14 +49,16 @@ public class ConveyGameOfLife{
             	break;
             }
         }
+        
         //Create object of the LiveCells Class
-        LiveCells board = new LiveCells(size,l);
+        Cells board = new Cells(size,l);
         //First Generation based on the input
         System.out.println("Generation 0");
         board.createBoard(size,l);
         board.printBoards();
         int gen=1;
-        while(!board.getisNull() && gen<40)
+        //Generating all generations
+        while(!board.getisNull())
         {
 	        System.out.println("Generation "+(gen++));
 	        board.nextState();
