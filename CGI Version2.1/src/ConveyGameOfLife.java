@@ -39,7 +39,7 @@ public class ConveyGameOfLife{
         int m = scan.nextInt();
         ArrayList<ArrayList<Integer> > l= new ArrayList<ArrayList<Integer> >();
         int i = 0;
-        //Reading no.of intital live cells
+        //Reading no.of initial live cells
         while (scan.hasNextInt()) {
         	l.add(i++, new ArrayList<>(Arrays.asList(scan.nextInt(), scan.nextInt())));
             if(m==i) {
@@ -51,14 +51,14 @@ public class ConveyGameOfLife{
         //First Generation based on the input
         System.out.println("Generation 0");
         board.createBoard(size,l);
-        board.printBoards();
+        System.out.println(board);
         int gen=1;
         //Generating all generations
         while(!board.getisNull())
         {
 	        System.out.println("Generation "+(gen++));
 	        board.nextState();
-	        board.printBoards();
+	        System.out.println(board);
         }
         scan.close();
     }

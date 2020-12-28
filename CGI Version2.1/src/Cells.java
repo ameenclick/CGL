@@ -18,7 +18,7 @@ public class Cells extends Board{
 	/**
 	 * Return the board string for check in test case
 	 * @param game*/
-	public String returnBoard() {
+	public String toString() {
 		String game="";
 		for(int i=0;i<board.length;i++)
         {

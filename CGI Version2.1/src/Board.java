@@ -31,36 +31,7 @@ public class Board {
 	       }
 	       return ("CurrentGeneration");
 	}
-	/**
-     * Printing Board in console
-     * @param board[][]
-     * @param n
-     * @return
-     */
 	
-	public void printBoards() {
-		for(int i=0;i<board.length;i++)
-        {
-            for(int j=0;j<board[0].length-1;j++)
-            {
-               if(board[i][j])
-                {
-                    System.out.print("*");
-                }
-                else{
-                    System.out.print(".");
-                }
-            }
-            if(board[i][board[0].length-1])
-            {
-                  System.out.print("*");
-            }
-            else{
-                System.out.print(".");
-            }
-            System.out.println();
-        }
-	}
 	
 	/**
      * Method to gerate a next generation. Call the printBoard

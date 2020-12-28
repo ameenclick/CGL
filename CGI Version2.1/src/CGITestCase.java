@@ -36,8 +36,8 @@ class CGITestCase {
 	    		+ ".....*....\n"
 	    		+ "....*.....\n"
 	    		+ "..........\n";
-	    Assertions.assertEquals(current,board.returnBoard());
-	    board.printBoards();
+	    Assertions.assertEquals(current,board.toString());
+	    System.out.println(board);
 	  //Test Case 2
 	    String nextGen="..........\n"
 	    		+ "...**.....\n"
@@ -50,9 +50,9 @@ class CGITestCase {
 	    		+ "..........\n"
 	    		+ "..........\n";
 	    board.nextState(); 
-	    Assertions.assertEquals(nextGen,board.returnBoard());
-	    System.out.println("NextGeneration");
-	    board.printBoards(); 
+	    Assertions.assertEquals(nextGen,board.toString());
+	    System.out.println("NextGeneration-Successful 1");
+	    System.out.println(board); 
 	  //Test Case 3
 	    nextGen="..........\n"
 	    		+ "...**.....\n"
@@ -65,9 +65,9 @@ class CGITestCase {
 	    		+ "..........\n"
 	    		+ "..........\n";
 	    board.nextState(); 
-	    Assertions.assertEquals(nextGen,board.returnBoard());
-	    System.out.println("NextGeneration");
-	    board.printBoards();
+	    Assertions.assertEquals(nextGen,board.toString());
+	    System.out.println("NextGeneration-Successful 2");
+	    System.out.println(board);
 	  //Test Case 4
 	    nextGen="..........\n"
 	    		+ "...**.....\n"
@@ -80,9 +80,18 @@ class CGITestCase {
 	    		+ "...*......\n"
 	    		+ "..........\n";
 	    board.nextState(); 
-	    Assertions.assertEquals(nextGen,board.returnBoard());
-	    System.out.println("NextGeneration");
-	    board.printBoards();   
+	    Assertions.assertEquals(nextGen,board.toString());
+	    System.out.println("NextGeneration-Successful 3");
+	    System.out.println(board); 
+	    int gen=4;
+	    while(!board.getisNull())
+        {
+	        board.nextState();
+	        System.out.println("NextGeneration-Successful "+gen++);
+	        System.out.println(board);
+        }
+	    System.out.println("The Generation Stops with "+--gen+" Generations");
+	    
 	}
 
 }
