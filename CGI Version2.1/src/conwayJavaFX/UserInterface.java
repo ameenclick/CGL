@@ -1,5 +1,5 @@
 package conwayJavaFX;
-
+import java.util.concurrent.TimeUnit;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -292,7 +292,7 @@ public class UserInterface {
 				}
 			}
 			window.getChildren().add(oddCanvas);
-			oddCanvas.getChildren().remove(rectangle);
+			board=oddGameBoard;
 			
 		}
 		catch (Exception e)  {
@@ -313,7 +313,7 @@ public class UserInterface {
 		
 		// Start the simulation by means of an animation Timeline using a keyframe duration of 
 		// 50 milliseconds
-		Timeline timeline = new Timeline(new KeyFrame(Duration.millis(50), ae -> runSimulation()));
+		Timeline timeline = new Timeline(new KeyFrame(Duration.millis(100), ae -> runSimulation()));
 		timeline.setCycleCount(Animation.INDEFINITE);	// The animation runs until it is stopped
 		timeline.play();								// Start the animation
 	};
@@ -324,6 +324,8 @@ public class UserInterface {
 	private void stopConway() {
 		// Your code goes here to display the current state of the board.
 		//System.out.println(this.board.toString());
+		window.getChildren().remove(oddCanvas);
+		window.getChildren().remove(evenCanvas);
 		System.out.println("Game is stopping....");
 		System.exit(0);
 	}
@@ -333,11 +335,12 @@ public class UserInterface {
 	 */
 	public void runSimulation(){
 		// Use the toggle to flip back and forth between the current generation and next generation boards.
+		oddCanvas.getChildren().clear();
+		evenCanvas.getChildren().clear();
 		if(toggle)
 		{
-			window.getChildren().remove(oddCanvas);
 			Rectangle rectangle=null;
-			evenGameBoard=oddGameBoard;
+			evenGameBoard=board;
 			evenGameBoard.nextState();
 			for(int i=0;i<80;i++)
 			{
@@ -363,8 +366,9 @@ public class UserInterface {
 		}
 		else
 		{
-			window.getChildren().remove(evenCanvas);
-			oddGameBoard=evenGameBoard;
+			//window.getChildren().remove(evenCanvas);
+			//window.getChildren().remove(oddCanvas);
+			oddGameBoard=board;
 			oddGameBoard.nextState();
 			Rectangle rectangle=null;
 			for(int i=0;i<80;i++)
