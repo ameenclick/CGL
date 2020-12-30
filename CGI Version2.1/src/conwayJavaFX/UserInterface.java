@@ -292,6 +292,7 @@ public class UserInterface {
 				}
 			}
 			window.getChildren().add(oddCanvas);
+			oddCanvas.getChildren().remove(rectangle);
 			
 		}
 		catch (Exception e)  {
@@ -322,7 +323,7 @@ public class UserInterface {
 	 */
 	private void stopConway() {
 		// Your code goes here to display the current state of the board.
-		System.out.println(this.board.toString());
+		//System.out.println(this.board.toString());
 		System.out.println("Game is stopping....");
 		System.exit(0);
 	}
@@ -356,7 +357,9 @@ public class UserInterface {
 				}
 			}
 			window.getChildren().add(evenCanvas);
-			this.toggle=false;
+			evenCanvas.getChildren().remove(rectangle);
+			board=evenGameBoard;
+			this.toggle=!toggle;
 		}
 		else
 		{
@@ -382,9 +385,10 @@ public class UserInterface {
 				}
 			}
 			window.getChildren().add(oddCanvas);
-			this.toggle=true;
+			oddCanvas.getChildren().remove(rectangle);
+			board=oddGameBoard;
+			this.toggle=!toggle;
 		}
-
 		// Your code goes here...
 	}
 
