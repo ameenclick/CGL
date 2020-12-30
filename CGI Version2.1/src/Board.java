@@ -19,6 +19,10 @@ public class Board {
         board = new boolean[n][n];
 	}
 	
+	public Board()
+	{
+	}
+	
 	/**
      * Creates initial genration [board]
      * @param n  size of the board n X n

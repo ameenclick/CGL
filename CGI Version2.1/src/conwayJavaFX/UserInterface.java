@@ -2,6 +2,8 @@ package conwayJavaFX;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 import javafx.animation.Animation;
@@ -41,6 +43,7 @@ public class UserInterface {
 	private double windowSizeWidth = ConwayMain.WINDOW_WIDTH - 40;
 	private double windowSizeHeight = controlPanelHeight-6;
 	private int cellSize = 6;
+	private ArrayList<ArrayList<Integer> >  liveCells = new ArrayList<ArrayList<Integer> >();
 	private int boardSizeWidth = (int)windowSizeWidth/cellSize;
 	private int boardSizeHeight = (int)(windowSizeHeight)/cellSize;
 	private int marginWidth = 20;
@@ -74,13 +77,13 @@ public class UserInterface {
 	// This attribute retains a copy of a reference to the application's Pane 
 	private Pane window;
 
+	private Board board;
 	// These attributes define the Board used by the simulation and the graphical representation
 	// There are two Boards. The previous Board and the new Board.  Once the new Board has been
 	// displayed, it becomes the previous Board for the generation of the next new Board.
-	//private Board oddGameBoard = new Board();		// The Board for odd frames of the animation
+	private Board oddGameBoard=new Board();;		// The Board for odd frames of the animation
 	private Pane oddCanvas = new Pane();			// Pane that holds its graphical representation
-	
-	//private Board evenGameBoard =  new Board();	// The Board for even frames of the animation
+	private Board evenGameBoard=new Board();;	// The Board for even frames of the animation
 	private Pane evenCanvas = new Pane();			// Pane that holds its graphical representation
 
 	private boolean toggle = true;					// A two-state attribute that specifies which
@@ -267,10 +270,33 @@ public class UserInterface {
 	private void loadImageData() {
 		try {
 			// Your code goes here......
+			oddGameBoard=new Board(80, liveCells);
+			oddGameBoard.createBoard(80, liveCells);
+			System.out.println(oddGameBoard);
+			Rectangle rectangle=null;
+			for(int i=0;i<80;i++)
+			{
+				for(int j=0;j<80;j++)
+				{
+					rectangle = new Rectangle(6*(i+1), 6*(j+1), 7, 7);
+					if(oddGameBoard.getBoard()[i][j])
+					{
+						rectangle.setFill(Color.BLACK);
+					}
+					else
+					{
+						rectangle.setFill(Color.TRANSPARENT);
+						rectangle.setStroke(Color.BLACK);
+					}
+					oddCanvas.getChildren().add(rectangle);
+				}
+			}
+			window.getChildren().add(oddCanvas);
 			
 		}
 		catch (Exception e)  {
 			// Since we have already done this check, this exception should never happen
+			System.out.println(e);
 		}
 		
 		button_Load.setDisable(true);				// Disable the Load button, since it is done
@@ -296,6 +322,7 @@ public class UserInterface {
 	 */
 	private void stopConway() {
 		// Your code goes here to display the current state of the board.
+		System.out.println(this.board.toString());
 		System.out.println("Game is stopping....");
 		System.exit(0);
 	}
@@ -305,7 +332,59 @@ public class UserInterface {
 	 */
 	public void runSimulation(){
 		// Use the toggle to flip back and forth between the current generation and next generation boards.
-		
+		if(toggle)
+		{
+			window.getChildren().remove(oddCanvas);
+			Rectangle rectangle=null;
+			evenGameBoard=oddGameBoard;
+			evenGameBoard.nextState();
+			for(int i=0;i<80;i++)
+			{
+				for(int j=0;j<80;j++)
+				{
+					rectangle = new Rectangle(6*(i+1), 6*(j+1), 7, 7);
+					if(evenGameBoard.getBoard()[i][j])
+					{
+						rectangle.setFill(Color.BLACK);
+					}
+					else
+					{
+						rectangle.setFill(Color.TRANSPARENT);
+						rectangle.setStroke(Color.BLACK);
+					}
+					evenCanvas.getChildren().add(rectangle);
+				}
+			}
+			window.getChildren().add(evenCanvas);
+			this.toggle=false;
+		}
+		else
+		{
+			window.getChildren().remove(evenCanvas);
+			oddGameBoard=evenGameBoard;
+			oddGameBoard.nextState();
+			Rectangle rectangle=null;
+			for(int i=0;i<80;i++)
+			{
+				for(int j=0;j<80;j++)
+				{
+					rectangle = new Rectangle(6*(i+1), 6*(j+1), 7, 7);
+					if(oddGameBoard.getBoard()[i][j])
+					{
+						rectangle.setFill(Color.BLACK);
+					}
+					else
+					{
+						rectangle.setFill(Color.TRANSPARENT);
+						rectangle.setStroke(Color.BLACK);
+					}
+					oddCanvas.getChildren().add(rectangle);
+				}
+			}
+			window.getChildren().add(oddCanvas);
+			this.toggle=true;
+		}
+
 		// Your code goes here...
 	}
 
@@ -324,7 +403,7 @@ public class UserInterface {
 		int firstValue = -1;
 		int secondValue = -1;
 		int lineNumber = 0;
-		
+		int i=0;
 		// Process each and every line in the input file
 		while (scanner_Input.hasNextLine()) {
 			lineNumber++;								// Keep track of which line is being used
@@ -379,6 +458,7 @@ public class UserInterface {
 						"Line number " + lineNumber + ": " + inputLine;	
 				return false;					// First item is not a long
 			}
+			liveCells.add(i++, new ArrayList<>(Arrays.asList(firstValue,secondValue)));
 		}
 		
 		// Should the execution reach here, the input file appears to be valid
